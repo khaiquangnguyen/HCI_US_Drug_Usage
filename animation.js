@@ -22,6 +22,8 @@ function getPosition(el) {
   };
 }
 
+show_all_group_college();
+
 function show_american_map() {
   var x = document.getElementById("myAudio");
   x.volume = 0.01;
@@ -254,8 +256,7 @@ function show_buildings() {
     opacity: [1, 0],
     easing: "easeOutExpo"
   });
-  // setTimeout(move_graph_to_building, 4000);
-  setTimeout(create_drug_chart, 1000);
+  setTimeout(move_graph_to_building, 4000);
 }
 
 function move_graph_to_building() {
@@ -801,31 +802,6 @@ function show_young_people_graph() {
   setTimeout(back_to_one, 4000);
 }
 
-// function show_images() {
-//   var img_1 = document.getElementById("alcohol_1");
-//   img_1.style.display = "block";
-//   anime({
-//     targets: "#alcohol_1",
-//     opacity: [0, 1],
-//     duration: 1000
-//   });
-//   setTimeout(function() {
-//     img_1.style.display = "none";
-//     img_1 = document.getElementById("alcohol_2");
-//     img_1.style.display = "block";
-//   }, 3500);
-//   setTimeout(function() {
-//     img_1.style.display = "none";
-//     anime({
-//       targets: ".text_area",
-//       opacity: [1, 0],
-//       easing: "easeOutExpo",
-//       duration: 3500
-//     });
-//   }, 7000);
-//   setTimeout(back_to_one, 12000);
-// }
-
 function back_to_one() {
   var el = document.getElementById("secondary_demo_text");
   el.style.display = "flex";
@@ -908,7 +884,6 @@ function back_to_one() {
     show_all_group_highschool();
   }, 6000);
 }
-show_all_group_college();
 
 function show_all_group_highschool() {
   var el = document.getElementById("highschool_demo_text");
@@ -1296,10 +1271,10 @@ function show_college_people_graph() {
       easing: "easeOutExpo",
       update: function(animation) {
         var m = document.getElementById("info_18");
-        var al = Math.round(animation.progress * 2400000 / 100);
+        var al = Math.round(block_index / square.length * 2400000 / 100);
         al = Math.max(al, 0);
         al = Math.min(al, 2400000);
-        var mari = Math.round(animation.progress * 1300000 / 100);
+        var mari = Math.round(block_index / square.length * 1300000 / 100);
         mari = Math.max(mari, 0);
         mari = Math.min(mari, 1300000);
         var inner_html =
