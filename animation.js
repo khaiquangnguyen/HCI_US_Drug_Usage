@@ -1271,10 +1271,10 @@ function show_college_people_graph() {
       easing: "easeOutExpo",
       update: function(animation) {
         var m = document.getElementById("info_18");
-        var al = Math.round(block_index / square.length * 2400000 / 100);
+        var al = Math.round(block_index * 2400000 / 50);
         al = Math.max(al, 0);
         al = Math.min(al, 2400000);
-        var mari = Math.round(block_index / square.length * 1300000 / 100);
+        var mari = Math.round(block_index * 1300000 / 130);
         mari = Math.max(mari, 0);
         mari = Math.min(mari, 1300000);
         var inner_html =
@@ -1331,10 +1331,10 @@ function show_college_people_graph() {
       easing: "easeOutExpo",
       update: function(animation) {
         var m = document.getElementById("info_19");
-        var al = Math.round(animation.progress * 2600000 / 100);
+        var al = Math.round( block_index2* 2600000 / 50);
         al = Math.max(al, 0);
         al = Math.min(al, 2600000);
-        var mari = Math.round(animation.progress * 1300000 / 100);
+        var mari = Math.round(block_index2 * 1300000 / 50);
         mari = Math.max(mari, 0);
         mari = Math.min(mari, 1300000);
         var inner_html =
@@ -1391,10 +1391,10 @@ function show_college_people_graph() {
       easing: "easeOutExpo",
       update: function(animation) {
         var m = document.getElementById("info_20");
-        var al = Math.round(animation.progress * 2800000 / 100);
+        var al = Math.round(block_index3 * 2800000 / 50);
         al = Math.max(al, 0);
-        al = Math.min(al, 120000);
-        var mari = Math.round(animation.progress * 1300000 / 100);
+        al = Math.min(al, 2800000);
+        var mari = Math.round(block_index3 * 1300000 / 50);
         mari = Math.max(mari, 0);
         mari = Math.min(mari, 1300000);
         var inner_html =
@@ -1451,10 +1451,10 @@ function show_college_people_graph() {
       easing: "easeOutExpo",
       update: function(animation) {
         var m = document.getElementById("info_21");
-        var al = Math.round(animation.progress * 3300000 / 100);
+        var al = Math.round(block_index3 * 3300000 / 50);
         al = Math.max(al, 0);
         al = Math.min(al, 3300000);
-        var mari = Math.round(animation.progress * 1300000 / 100);
+        var mari = Math.round(block_index3 * 1300000 / 50);
         mari = Math.max(mari, 0);
         mari = Math.min(mari, 1300000);
         var inner_html =
