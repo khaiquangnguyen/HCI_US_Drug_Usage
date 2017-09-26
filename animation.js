@@ -1,3 +1,9 @@
+const background_color = "#1E1E24";
+const background_secondary_color = "#444140";
+const text_color = "#E5DAD7";
+const main_color = "#E54B4B";
+const secondary_color = "#FFA987";
+
 function getPosition(el) {
   var xPos = 0;
   var yPos = 0;
@@ -59,7 +65,7 @@ function show_american_map() {
         return [a, 0];
       },
       opacity: [0, 1],
-      fill: "#c1be84",
+      fill: secondary_color,
       duration: 1000,
       easing: "easeOutExpo",
       offset: "+=1000"
@@ -71,7 +77,7 @@ function show_american_map() {
         return [a, 0];
       },
       opacity: [0, 1],
-      fill: "#c1be84",
+      fill: text_color,
       duration: 1000,
       offset: "+=2000",
       easing: "easeOutExpo"
@@ -83,7 +89,7 @@ function show_american_map() {
         return [a, 0];
       },
       opacity: [0, 1],
-      fill: "#c1be84",
+      fill: text_color,
       duration: 1000,
       offset: "+=2000",
       easing: "easeOutExpo"
@@ -95,7 +101,7 @@ function show_american_map() {
         return [a, 0];
       },
       opacity: [0, 1],
-      fill: "#c1be84",
+      fill: text_color,
       duration: 1000,
       offset: "+=2000",
       easing: "easeOutExpo"
@@ -133,7 +139,7 @@ function shrink_american_map() {
     translateX: [{ value: 30 }],
     scale: [{ value: 0.5 }],
     delay: (el, i) => 200 + i * 8,
-    fill: "#c1be84",
+    fill: text_color,
     duration: 2500
   });
   setTimeout(show_demographic_chart, 2200);
@@ -188,7 +194,7 @@ function show_demographic_chart() {
     targets: ".demographic_chart_bar",
     translateY: [300, 0],
     scale: [0, 1],
-    background: "#c1be84",
+    background: text_color,
     delay: (el, i) => 100 + i * 40,
     duration: 2500,
     easing: "easeOutExpo"
@@ -212,7 +218,7 @@ function balance_demographic_graph() {
     el.style.left = ((22 - 12) * 5 + 8).toString() + "rem";
     el.style.fontSize = "50px";
     el.style.marginBottom = "9rem";
-    el.style.color = "#c1be84";
+    el.style.color = text_color;
     chart.appendChild(el);
     anime({
       targets: "#fourmil",
@@ -245,7 +251,7 @@ function show_buildings() {
   anime({
     targets: "#buildings",
     translateY: ["-15rem", 0],
-    fill: "#c1be84",
+    fill: text_color,
     delay: (el, i) => 100,
     duration: 1200,
     delay: (el, i) => i * 500,
@@ -378,7 +384,8 @@ function show_human_figure() {
       opacity: [0, 1],
       scale: [0, 1],
       duration: 700,
-      easing: "easeOutExpo"
+      easing: "easeOutExpo",
+        color: text_color
     },
     {
       targets: [word, child, highschooler, colleger],
@@ -407,6 +414,7 @@ function show_drug_figure() {
   timeline.add([
     {
       targets: child,
+        fill: main_color,
       opacity: [0, 1],
       scale: [0, 1],
       duration: 400,
@@ -414,6 +422,7 @@ function show_drug_figure() {
     },
     {
       targets: highschooler,
+        fill: secondary_color,
       opacity: [0, 1],
       scale: [0, 1],
       duration: 400,
@@ -441,7 +450,7 @@ function create_drug_chart() {
   el = document.getElementById("drug_chart");
   el.style.display = "flex";
   var maxElements = 25;
-  var colors = ["#FF324A", "#31FFA6", "#206EFF", "#FFFF99"];
+  var colors = [main_color, secondary_color];
   var createElements = (function() {
     var sectionEl = document.getElementById("graph_secondary_alcohol");
     for (var i = 0; i < maxElements; i++) {
@@ -890,7 +899,7 @@ function show_all_group_highschool() {
   el.style.display = "flex";
 
   el = document.getElementById("drug_chart");
-  var colors = ["#FF324A", "#31FFA6", "#206EFF", "#FFFF99"];
+  var colors = [main_color, secondary_color];
   el.style.display = "flex";
   var maxElements = 99;
   var createElements = (function() {
@@ -1040,7 +1049,7 @@ function show_all_group_college() {
   el = document.getElementById("drug_chart");
   el.style.display = "flex";
   var maxElements = 237;
-  var colors = ["#FF324A", "#31FFA6", "#206EFF", "#FFFF99"];
+  var colors = [main_color, secondary_color];
   var createElements = (function() {
     var sectionEl = document.getElementById("graph_college_alcohol");
     for (var i = 0; i < maxElements; i++) {
@@ -1532,20 +1541,22 @@ function show_proportion() {
       opacity: [0, 1],
       scale: [0, 2],
       duration: 700,
-      easing: "easeOutExpo"
+      easing: "easeOutExpo",
+        fill: main_color
     },
     {
       targets: highschooler,
       opacity: [0, 1],
       scale: [0, 2],
       duration: 700,
-      easing: "easeOutExpo"
+      easing: "easeOutExpo",
+        fill: main_color
     },
     {
       targets: colleger,
       opacity: [0, 1],
       scale: [0, 2],
-      fill: "#123456",
+      fill: secondary_color,
       duration: 700,
       easing: "easeOutExpo"
     },
