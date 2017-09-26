@@ -1370,7 +1370,7 @@ function show_college_people_graph() {
           "<br />" +
           "Marijuana: " +
           mari.toString();
-        // m.innerHTML = inner_html.toString();
+        m.innerHTML = inner_html.toString();
       }
     });
     if (block_index2 < square2.length - 1) {
@@ -1430,7 +1430,7 @@ function show_college_people_graph() {
           "<br />" +
           "Marijuana: " +
           mari.toString();
-        // m.innerHTML = inner_html.toString();
+        m.innerHTML = inner_html.toString();
       }
     });
     if (block_index3 < square3.length - 1) {
@@ -1490,7 +1490,7 @@ function show_college_people_graph() {
           "<br />" +
           "Marijuana: " +
           mari.toString();
-        // m.innerHTML = inner_html.toString();
+        m.innerHTML = inner_html.toString();
       }
     });
     if (block_index4 < square4.length - 1) {
