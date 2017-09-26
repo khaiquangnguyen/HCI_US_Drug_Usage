@@ -28,7 +28,7 @@ function getPosition(el) {
   };
 }
 
-show_all_group_college();
+show_american_map();
 
 function show_american_map() {
   var x = document.getElementById("myAudio");
@@ -65,7 +65,7 @@ function show_american_map() {
         return [a, 0];
       },
       opacity: [0, 1],
-      fill: text_color,
+      fill: secondary_color,
       duration: 1000,
       easing: "easeOutExpo",
       offset: "+=1000"
@@ -384,7 +384,8 @@ function show_human_figure() {
       opacity: [0, 1],
       scale: [0, 1],
       duration: 700,
-      easing: "easeOutExpo"
+      easing: "easeOutExpo",
+        color: text_color
     },
     {
       targets: [word, child, highschooler, colleger],
@@ -413,6 +414,7 @@ function show_drug_figure() {
   timeline.add([
     {
       targets: child,
+        fill: main_color,
       opacity: [0, 1],
       scale: [0, 1],
       duration: 400,
@@ -420,6 +422,7 @@ function show_drug_figure() {
     },
     {
       targets: highschooler,
+        fill: secondary_color,
       opacity: [0, 1],
       scale: [0, 1],
       duration: 400,
@@ -896,7 +899,7 @@ function show_all_group_highschool() {
   el.style.display = "flex";
 
   el = document.getElementById("drug_chart");
-  var colors = ["#FF324A", "#31FFA6", "#206EFF", "#FFFF99"];
+  var colors = [main_color, secondary_color];
   el.style.display = "flex";
   var maxElements = 99;
   var createElements = (function() {
@@ -1046,7 +1049,7 @@ function show_all_group_college() {
   el = document.getElementById("drug_chart");
   el.style.display = "flex";
   var maxElements = 237;
-  var colors = ["#FF324A", "#31FFA6", "#206EFF", "#FFFF99"];
+  var colors = [main_color, secondary_color];
   var createElements = (function() {
     var sectionEl = document.getElementById("graph_college_alcohol");
     for (var i = 0; i < maxElements; i++) {
@@ -1538,20 +1541,22 @@ function show_proportion() {
       opacity: [0, 1],
       scale: [0, 2],
       duration: 700,
-      easing: "easeOutExpo"
+      easing: "easeOutExpo",
+        fill: main_color
     },
     {
       targets: highschooler,
       opacity: [0, 1],
       scale: [0, 2],
       duration: 700,
-      easing: "easeOutExpo"
+      easing: "easeOutExpo",
+        fill: main_color
     },
     {
       targets: colleger,
       opacity: [0, 1],
       scale: [0, 2],
-      fill: "#123456",
+      fill: secondary_color,
       duration: 700,
       easing: "easeOutExpo"
     },
