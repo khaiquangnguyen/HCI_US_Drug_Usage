@@ -31,9 +31,13 @@ function getPosition(el) {
 show_american_map();
 
 function show_american_map() {
-  var x = document.getElementById("myAudio");
-  x.volume = 1;
+  var x = document.getElementById("background");
+  x.volume = 0.15;
+  x.loop = true;
   x.play();
+  var y = document.getElementById("sub");
+  y.volume = 1;
+  y.play();
   el = document.getElementById("american_map");
   el.style.display = "block";
   var basicTimeline = anime.timeline();
@@ -67,8 +71,7 @@ function show_american_map() {
       opacity: [0, 1],
       fill: secondary_color,
       duration: 1000,
-      easing: "easeOutExpo",
-      offset: "+=1000"
+      easing: "easeOutExpo"
     },
     {
       targets: "#polulation_text",
@@ -79,7 +82,7 @@ function show_american_map() {
       opacity: [0, 1],
       fill: text_color,
       duration: 1000,
-      offset: "+=2000",
+      offset: "+=3000",
       easing: "easeOutExpo"
     },
     {
@@ -91,7 +94,7 @@ function show_american_map() {
       opacity: [0, 1],
       fill: text_color,
       duration: 1000,
-      offset: "+=2000",
+      offset: "+=4000",
       easing: "easeOutExpo"
     },
     {
@@ -103,7 +106,7 @@ function show_american_map() {
       opacity: [0, 1],
       fill: text_color,
       duration: 1000,
-      offset: "+=2000",
+      offset: "+=3000",
       easing: "easeOutExpo"
     },
     {
@@ -130,7 +133,7 @@ function show_american_map() {
   setTimeout(function() {
     // anime();
     shrink_american_map();
-  }, 18000);
+  }, 17000);
 }
 
 function shrink_american_map() {
@@ -199,7 +202,7 @@ function show_demographic_chart() {
     duration: 2500,
     easing: "easeOutExpo"
   });
-  setTimeout(balance_demographic_graph, 2000);
+  setTimeout(balance_demographic_graph, 9000);
 }
 
 function balance_demographic_graph() {
@@ -262,7 +265,7 @@ function show_buildings() {
     opacity: [1, 0],
     easing: "easeOutExpo"
   });
-  setTimeout(move_graph_to_building, 4000);
+  setTimeout(move_graph_to_building, 16000);
 }
 
 function move_graph_to_building() {
@@ -287,12 +290,12 @@ function move_graph_to_building() {
             el.getBoundingClientRect().left;
           return distance;
         },
-        delay: (i - 12) * 200,
-        duration: 1000
+        delay: (i - 12) * 1000,
+        duration: 2000
       },
       opacity: {
         value: 0,
-        delay: 800 + (i - 12) * 200,
+        delay: 800 + (i - 12) * 1000,
         duration: 500
       },
       translateY: {
@@ -302,24 +305,24 @@ function move_graph_to_building() {
             target.getBoundingClientRect().top - el.getBoundingClientRect().top;
           return distance;
         },
-        delay: 500 + (i - 12) * 200,
+        delay: 500 + (i - 12) * 1000,
         duration: 1000
       },
       scaleY: {
         value: 0,
-        delay: 500 + (i - 12) * 200,
+        delay: 500 + (i - 12) * 1000,
         duration: 1000,
         easing: "easeOutExpo"
       },
       color: "#767661",
       scaleX: {
         value: 0,
-        delay: 500 + (i - 12) * 200,
+        delay: 500 + (i - 12) * 1000,
         duration: 1000,
         easing: "easeOutExpo"
       },
-      delay: (i - 11) * 200,
-      duration: 1000,
+      delay: (i - 11) * 1000,
+      duration: 2000,
       easing: "easeOutExpo",
       update: function(animation) {
         var el = document.getElementById("secondary_building_text");
@@ -344,7 +347,7 @@ function move_graph_to_building() {
     var el = document.getElementById("demographic_chart");
     el.style.display = "none";
     show_human_figure();
-  }, 7000);
+  }, 13000);
 }
 
 function show_human_figure() {
@@ -385,7 +388,7 @@ function show_human_figure() {
       scale: [0, 1],
       duration: 700,
       easing: "easeOutExpo",
-        color: text_color
+      color: text_color
     },
     {
       targets: [word, child, highschooler, colleger],
@@ -402,7 +405,7 @@ function show_human_figure() {
     colleger.style.display = "none";
     word.style.display = "none";
   };
-  setTimeout(show_drug_figure, 10000);
+  setTimeout(show_drug_figure, 9000);
 }
 
 function show_drug_figure() {
@@ -414,7 +417,7 @@ function show_drug_figure() {
   timeline.add([
     {
       targets: child,
-        fill: main_color,
+      fill: main_color,
       opacity: [0, 1],
       scale: [0, 1],
       duration: 400,
@@ -422,7 +425,7 @@ function show_drug_figure() {
     },
     {
       targets: highschooler,
-        fill: secondary_color,
+      fill: secondary_color,
       opacity: [0, 1],
       scale: [0, 1],
       duration: 400,
@@ -432,7 +435,7 @@ function show_drug_figure() {
       targets: [highschooler, child],
       opacity: [1, 0],
       scale: [1, 0],
-      offset: "+=2500",
+      offset: "+=8500",
       duration: 3000,
       easing: "easeOutExpo"
     }
@@ -441,7 +444,7 @@ function show_drug_figure() {
     child.style.display = "none";
     highschooler.style.display = "none";
   };
-  setTimeout(create_drug_chart, 10000);
+  setTimeout(create_drug_chart, 15000);
 }
 
 function create_drug_chart() {
@@ -568,10 +571,10 @@ function create_drug_chart() {
       opacity: [1, 0],
       duration: 3000
     });
-  }, 3000);
+  }, 21000);
   setTimeout(function() {
     show_young_people_graph();
-  }, 4000);
+  }, 22000);
 }
 
 function show_young_people_graph() {
@@ -807,8 +810,8 @@ function show_young_people_graph() {
       easing: "easeOutExpo",
       duration: 3500
     });
-  }, 2000);
-  setTimeout(back_to_one, 4000);
+  }, 18000);
+  setTimeout(back_to_one, 20000);
 }
 
 function back_to_one() {
@@ -1020,6 +1023,7 @@ function show_all_group_highschool() {
       return index * 30;
     },
     update: function(animation) {
+      window.scrollBy(0, 5);
       var el = document.getElementById("highschool_demo_text");
       var al = Math.round(animation.progress * 4744000 / 100);
       al = Math.max(al, 0);
@@ -1042,7 +1046,10 @@ function show_all_group_highschool() {
     opacity: [0, 1],
     duration: 2000
   });
-  setTimeout(show_all_group_college, 400);
+  setTimeout(function() {
+    window.scrollTo(0, 0);
+  }, 7000);
+  setTimeout(show_all_group_college, 17000);
 }
 
 function show_all_group_college() {
@@ -1142,6 +1149,9 @@ function show_all_group_college() {
         0
       ];
     },
+    update: function() {
+      window.scrollBy(0, 10);
+    },
     delay: function(el, index) {
       return index * 30;
     }
@@ -1196,7 +1206,10 @@ function show_all_group_college() {
     opacity: [0, 1],
     duration: 2000
   });
-  setTimeout(show_college_people_graph, 5000);
+  setTimeout(function() {
+    window.scrollTo(0, 0);
+  }, 10000);
+  setTimeout(show_college_people_graph, 28000);
 }
 
 function show_college_people_graph() {
@@ -1339,6 +1352,7 @@ function show_college_people_graph() {
       duration: 1000,
       easing: "easeOutExpo",
       update: function(animation) {
+        window.scrollBy(0, 0.5);
         var m = document.getElementById("info_19");
         var al = Math.round(block_index2 * 2600000 / 50);
         al = Math.max(al, 0);
@@ -1513,14 +1527,17 @@ function show_college_people_graph() {
       duration: 4000,
       easing: "easeOutExpo"
     });
-  }, 14000);
+  }, 32000);
+  setTimeout(function() {
+    window.scrollTo(0, 0);
+  }, 10000);
   setTimeout(function() {
     var ele = document.getElementById("young_people_graph");
     ele.style.display = "none";
     var ele = document.getElementById("buildings");
     ele.style.display = "none";
     show_proportion();
-  }, 15000);
+  }, 40000);
 }
 
 function show_proportion() {
@@ -1542,7 +1559,7 @@ function show_proportion() {
       scale: [0, 2],
       duration: 700,
       easing: "easeOutExpo",
-        fill: main_color
+      fill: main_color
     },
     {
       targets: highschooler,
@@ -1550,7 +1567,7 @@ function show_proportion() {
       scale: [0, 2],
       duration: 700,
       easing: "easeOutExpo",
-        fill: main_color
+      fill: main_color
     },
     {
       targets: colleger,
@@ -1565,7 +1582,7 @@ function show_proportion() {
       targets: [child, highschooler, colleger],
       opacity: [1, 0],
       scale: [1, 0],
-      offset: "+=2000",
+      offset: "+=20000",
       duration: 3000,
       easing: "easeOutExpo"
     }
