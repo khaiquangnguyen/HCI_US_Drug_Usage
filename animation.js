@@ -22,11 +22,11 @@ function getPosition(el) {
   };
 }
 
-show_all_group_college();
+show_american_map();
 
 function show_american_map() {
   var x = document.getElementById("myAudio");
-  x.volume = 0.01;
+  x.volume = 1;
   x.play();
   el = document.getElementById("american_map");
   el.style.display = "block";
@@ -86,7 +86,6 @@ function show_american_map() {
       fill: "#c1be84",
       duration: 1000,
       offset: "+=2000",
-
       easing: "easeOutExpo"
     },
     {
@@ -111,6 +110,7 @@ function show_american_map() {
       translateX: "5rem",
       duration: 2000,
       offset: "+=3000",
+      easing: "easeOutExpo",
       opacity: [1, 0],
       complete: function() {
         document.getElementById("age_group_text").style.display = "none";
@@ -302,14 +302,14 @@ function move_graph_to_building() {
       scaleY: {
         value: 0,
         delay: 500 + (i - 12) * 200,
-        duration: 100,
+        duration: 1000,
         easing: "easeOutExpo"
       },
       color: "#767661",
       scaleX: {
         value: 0,
         delay: 500 + (i - 12) * 200,
-        duration: 100,
+        duration: 1000,
         easing: "easeOutExpo"
       },
       delay: (i - 11) * 200,
@@ -320,17 +320,17 @@ function move_graph_to_building() {
         var d = Math.round((animation.progress - 17) * 12000000 / 23);
         d = Math.max(d, 0);
         d = Math.min(d, 12000000);
-        el.innerHTML = d.toString();
+        el.innerHTML = d;
         el = document.getElementById("highschool_building_text");
         d = Math.round((animation.progress - 25) * 12000000 / 30);
         d = Math.max(d, 0);
         d = Math.min(d, 12000000);
-        el.innerHTML = d.toString();
+        el.innerHTML = d;
         el = document.getElementById("college_building_text");
         d = Math.round((animation.progress - 32) * 16000000 / 40);
         d = Math.max(d, 0);
         d = Math.min(d, 16000000);
-        el.innerHTML = d.toString();
+        el.innerHTML = d;
       }
     });
   }
@@ -1331,7 +1331,7 @@ function show_college_people_graph() {
       easing: "easeOutExpo",
       update: function(animation) {
         var m = document.getElementById("info_19");
-        var al = Math.round( block_index2* 2600000 / 50);
+        var al = Math.round(block_index2 * 2600000 / 50);
         al = Math.max(al, 0);
         al = Math.min(al, 2600000);
         var mari = Math.round(block_index2 * 1300000 / 50);
@@ -1560,6 +1560,8 @@ function show_proportion() {
     }
   ]);
 }
+
+function show_credit() {}
 // var createElements = (function() {
 //   var sectionEl = document.createElement('section');
 //   for (var i = 0; i < maxElements; i++) {
