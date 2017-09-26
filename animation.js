@@ -107,7 +107,7 @@ function show_american_map() {
         "#us_text"
       ],
       translateX: "5rem",
-      durataion: 2000,
+      duration: 2000,
       offset: "+=3000",
       opacity: [1, 0],
       complete: function() {
@@ -254,7 +254,8 @@ function show_buildings() {
     opacity: [1, 0],
     easing: "easeOutExpo"
   });
-  setTimeout(move_graph_to_building, 4000);
+  // setTimeout(move_graph_to_building, 4000);
+  setTimeout(create_drug_chart, 1000);
 }
 
 function move_graph_to_building() {
@@ -285,7 +286,7 @@ function move_graph_to_building() {
       opacity: {
         value: 0,
         delay: 800 + (i - 12) * 200,
-        durataion: 500
+        duration: 500
       },
       translateY: {
         value: function(el) {
@@ -300,14 +301,14 @@ function move_graph_to_building() {
       scaleY: {
         value: 0,
         delay: 500 + (i - 12) * 200,
-        durataion: 100,
+        duration: 100,
         easing: "easeOutExpo"
       },
       color: "#767661",
       scaleX: {
         value: 0,
         delay: 500 + (i - 12) * 200,
-        durataion: 100,
+        duration: 100,
         easing: "easeOutExpo"
       },
       delay: (i - 11) * 200,
@@ -339,8 +340,6 @@ function move_graph_to_building() {
   }, 7000);
 }
 
-show_demographic_chart();
-
 function show_human_figure() {
   var child = document.getElementById("the_child");
   child.style.display = "block";
@@ -356,28 +355,28 @@ function show_human_figure() {
       targets: child,
       opacity: [0, 1],
       scale: [0, 1],
-      durataion: 400,
+      duration: 400,
       easing: "easeOutExpo"
     },
     {
       targets: highschooler,
       opacity: [0, 1],
       scale: [0, 1],
-      durataion: 400,
+      duration: 400,
       easing: "easeOutExpo"
     },
     {
       targets: colleger,
       opacity: [0, 1],
       scale: [0, 1],
-      durataion: 400,
+      duration: 400,
       easing: "easeOutExpo"
     },
     {
       targets: word,
       opacity: [0, 1],
       scale: [0, 1],
-      durataion: 700,
+      duration: 700,
       easing: "easeOutExpo"
     },
     {
@@ -385,7 +384,7 @@ function show_human_figure() {
       opacity: [1, 0],
       scale: [1, 0],
       offset: "+=2500",
-      durataion: 3000,
+      duration: 3000,
       easing: "easeOutExpo"
     }
   ]);
@@ -409,14 +408,14 @@ function show_drug_figure() {
       targets: child,
       opacity: [0, 1],
       scale: [0, 1],
-      durataion: 400,
+      duration: 400,
       easing: "easeOutExpo"
     },
     {
       targets: highschooler,
       opacity: [0, 1],
       scale: [0, 1],
-      durataion: 400,
+      duration: 400,
       easing: "easeOutExpo"
     },
     {
@@ -424,7 +423,7 @@ function show_drug_figure() {
       opacity: [1, 0],
       scale: [1, 0],
       offset: "+=2500",
-      durataion: 3000,
+      duration: 3000,
       easing: "easeOutExpo"
     }
   ]);
@@ -432,10 +431,12 @@ function show_drug_figure() {
     child.style.display = "none";
     highschooler.style.display = "none";
   };
-  setTimeout(create_drug_chart, 5000);
+  setTimeout(create_drug_chart, 10000);
 }
 
 function create_drug_chart() {
+  var el = document.getElementById("secondary_demo_text");
+  el.style.display = "flex";
   el = document.getElementById("drug_chart");
   el.style.display = "flex";
   var maxElements = 25;
@@ -496,6 +497,11 @@ function create_drug_chart() {
     }
   })();
   anime({
+    targets: "#secondary_demo_text",
+    opacity: [0, 1],
+    duration: 3000
+  });
+  anime({
     targets: ".secondary_block",
     translateX: function(el, i) {
       target = document.getElementById("secondary_building");
@@ -521,7 +527,23 @@ function create_drug_chart() {
     easing: "easeOutExpo",
     duration: 600,
     scale: [0.6, 1],
-    opacity: [0, 1]
+    opacity: [0, 1],
+    update: function(animation) {
+      var el = document.getElementById("secondary_demo_text");
+      var al = Math.round(animation.progress * 1200000 / 100);
+      al = Math.max(al, 0);
+      al = Math.min(al, 1200000);
+      var mari = Math.round(animation.progress * 520000 / 100);
+      mari = Math.max(mari, 0);
+      mari = Math.min(mari, 520000);
+      var inner_html =
+        "Alcohol: " +
+        al.toString() +
+        "<br />" +
+        "Marijuana: " +
+        mari.toString();
+      el.innerHTML = inner_html.toString();
+    }
   });
 
   setTimeout(function() {
@@ -530,33 +552,36 @@ function create_drug_chart() {
         "#highschool_building",
         "#college_building",
         "#graph_highschool",
-        "#graph_college"
+        "#graph_college",
+        "#secondary_demo_text"
       ],
-      visibilitY: "hidden",
       opacity: [1, 0],
       duration: 3000
     });
   }, 3000);
   setTimeout(function() {
     show_young_people_graph();
-  }, 7000);
+  }, 4000);
 }
 
 function show_young_people_graph() {
+  var el = document.getElementById("secondary_demo_text");
   chart = document.getElementById("young_people_graph");
   var el;
   for (var i = 12; i < 15; i++) {
     var t = document.createElement("div");
     t.setAttribute("class", "bar_container");
     var m = document.createElement("div");
-    m.setAttribute("class", "text_area");
+    m.setAttribute("class", "text_area text_area1");
+    m.setAttribute("id", "info_" + i.toString());
+    m.style.display = "flex";
     m.innerHTML =
       "Age: " +
       i.toString() +
       "<br />" +
-      "Alcohol: 10000" +
+      "Alcohol: 0" +
       "<br />" +
-      "Marijuana: 10000";
+      "Marijuana: 0";
     el = document.createElement("div");
     el.setAttribute("class", "young_graph_bar");
     el.setAttribute("id", "bar" + String.fromCharCode(65 + i) + "alcohol");
@@ -598,15 +623,32 @@ function show_young_people_graph() {
           a = document.getElementById("graph_secondary_mari");
         }
         var b = document.getElementById("young_people_graph");
-        var dis =
-          a.getBoundingClientRect().top - b.getBoundingClientRect().top;
+        var dis = a.getBoundingClientRect().top - b.getBoundingClientRect().top;
         return [dis, 0];
       },
       delay: function(el, index) {
         return index * 150;
       },
       duration: 1000,
-      easing: "easeOutExpo"
+      easing: "easeOutExpo",
+      update: function(animation) {
+        var m = document.getElementById("info_12");
+        var al = Math.round(animation.progress * 120000 / 100);
+        al = Math.max(al, 0);
+        al = Math.min(al, 120000);
+        var mari = Math.round(animation.progress * 40000 / 100);
+        mari = Math.max(mari, 0);
+        mari = Math.min(mari, 40000);
+        var inner_html =
+          "Age: 12" +
+          "<br />" +
+          "Alcohol: " +
+          al.toString() +
+          "<br />" +
+          "Marijuana: " +
+          mari.toString();
+        m.innerHTML = inner_html.toString();
+      }
     });
     if (block_index < square.length - 1) {
       block_index += 1;
@@ -644,15 +686,32 @@ function show_young_people_graph() {
           a = document.getElementById("graph_secondary_mari");
         }
         var b = document.getElementById("young_people_graph");
-        var dis =
-          a.getBoundingClientRect().top - b.getBoundingClientRect().top;
+        var dis = a.getBoundingClientRect().top - b.getBoundingClientRect().top;
         return [dis, 0];
       },
       delay: function(el, index) {
         return index * 150;
       },
       duration: 1000,
-      easing: "easeOutExpo"
+      easing: "easeOutExpo",
+      update: function(animation) {
+        var m = document.getElementById("info_13");
+        var al = Math.round(animation.progress * 340000 / 100);
+        al = Math.max(al, 0);
+        al = Math.min(al, 340000);
+        var mari = Math.round(animation.progress * 136000 / 100);
+        mari = Math.max(mari, 0);
+        mari = Math.min(mari, 136000);
+        var inner_html =
+          "Age: 13" +
+          "<br />" +
+          "Alcohol: " +
+          al.toString() +
+          "<br />" +
+          "Marijuana: " +
+          mari.toString();
+        m.innerHTML = inner_html.toString();
+      }
     });
     if (block_index2 < square2.length - 1) {
       block_index2 += 1;
@@ -690,15 +749,32 @@ function show_young_people_graph() {
           a = document.getElementById("graph_secondary_mari");
         }
         var b = document.getElementById("young_people_graph");
-        var dis =
-          a.getBoundingClientRect().top - b.getBoundingClientRect().top;
+        var dis = a.getBoundingClientRect().top - b.getBoundingClientRect().top;
         return [dis, 0];
       },
       delay: function(el, index) {
         return index * 150;
       },
       duration: 1000,
-      easing: "easeOutExpo"
+      easing: "easeOutExpo",
+      update: function(animation) {
+        var m = document.getElementById("info_14");
+        var al = Math.round(animation.progress * 724000 / 100);
+        al = Math.max(al, 0);
+        al = Math.min(al, 724000);
+        var mari = Math.round(animation.progress * 348000 / 100);
+        mari = Math.max(mari, 0);
+        mari = Math.min(mari, 348000);
+        var inner_html =
+          "Age: 14" +
+          "<br />" +
+          "Alcohol: " +
+          al.toString() +
+          "<br />" +
+          "Marijuana: " +
+          mari.toString();
+        m.innerHTML = inner_html.toString();
+      }
     });
     if (block_index3 < square3.length - 1) {
       block_index3 += 1;
@@ -708,45 +784,51 @@ function show_young_people_graph() {
   move_block();
   move_block2();
   move_block3();
-  setTimeout(function() {
-    anime({
-      targets: ".text_area",
-      opacity: [0, 1],
-      easing: "easeOutExpo",
-      durataion: 3500
-    });
-  }, 4000);
-  setTimeout(function() {
-    show_images();
-  }, 7000);
-}
-
-function show_images() {
-  var img_1 = document.getElementById("alcohol_1");
-  img_1.style.display = "block";
   anime({
-    targets: "#alcohol_1",
+    targets: ".text_area1",
     opacity: [0, 1],
-    durataion: 1000
+    easing: "easeOutExpo",
+    duration: 3500
   });
   setTimeout(function() {
-    img_1.style.display = "none";
-    img_1 = document.getElementById("alcohol_2");
-    img_1.style.display = "block";
-  }, 3500);
-  setTimeout(function() {
-    img_1.style.display = "none";
     anime({
-      targets: ".text_area",
+      targets: ".text_area1",
       opacity: [1, 0],
       easing: "easeOutExpo",
-      durataion: 3500
+      duration: 3500
     });
-  }, 7000);
-  setTimeout(back_to_one, 12000);
+  }, 2000);
+  setTimeout(back_to_one, 4000);
 }
 
+// function show_images() {
+//   var img_1 = document.getElementById("alcohol_1");
+//   img_1.style.display = "block";
+//   anime({
+//     targets: "#alcohol_1",
+//     opacity: [0, 1],
+//     duration: 1000
+//   });
+//   setTimeout(function() {
+//     img_1.style.display = "none";
+//     img_1 = document.getElementById("alcohol_2");
+//     img_1.style.display = "block";
+//   }, 3500);
+//   setTimeout(function() {
+//     img_1.style.display = "none";
+//     anime({
+//       targets: ".text_area",
+//       opacity: [1, 0],
+//       easing: "easeOutExpo",
+//       duration: 3500
+//     });
+//   }, 7000);
+//   setTimeout(back_to_one, 12000);
+// }
+
 function back_to_one() {
+  var el = document.getElementById("secondary_demo_text");
+  el.style.display = "flex";
   var square = document.getElementsByClassName("secondary_block alcohol");
   var block_index = 0;
   anime({
@@ -754,7 +836,8 @@ function back_to_one() {
       "#highschool_building",
       "#college_building",
       "#graph_highschool",
-      "#graph_college"
+      "#graph_college",
+      "#secondary_demo_text"
     ],
     visibilitY: "true",
     opacity: [0, 1],
@@ -774,8 +857,7 @@ function back_to_one() {
       translateY: function(ele, i) {
         var a = document.getElementById("graph_secondary");
         var b = document.getElementById("young_people_graph");
-        var dis =
-          b.getBoundingClientRect().top - a.getBoundingClientRect().top;
+        var dis = b.getBoundingClientRect().top - a.getBoundingClientRect().top;
         return [dis, 0];
       },
       delay: function(el, index) {
@@ -807,8 +889,7 @@ function back_to_one() {
       translateY: function(ele, i) {
         var a = document.getElementById("graph_secondary");
         var b = document.getElementById("young_people_graph");
-        var dis =
-          b.getBoundingClientRect().top - a.getBoundingClientRect().top;
+        var dis = b.getBoundingClientRect().top - a.getBoundingClientRect().top;
         return [dis, 0];
       },
       delay: function(el, index) {
@@ -827,8 +908,12 @@ function back_to_one() {
     show_all_group_highschool();
   }, 6000);
 }
+show_all_group_college();
 
 function show_all_group_highschool() {
+  var el = document.getElementById("highschool_demo_text");
+  el.style.display = "flex";
+
   el = document.getElementById("drug_chart");
   var colors = ["#FF324A", "#31FFA6", "#206EFF", "#FFFF99"];
   el.style.display = "flex";
@@ -896,7 +981,7 @@ function show_all_group_highschool() {
   anime({
     targets: ".highschool_block_alcohol",
     easing: "easeOutExpo",
-    durataion: 1500,
+    duration: 1500,
     scale: [0.6, 1],
     opacity: [0, 1],
     translateX: function(el, i) {
@@ -926,7 +1011,7 @@ function show_all_group_highschool() {
   anime({
     targets: ".highschool_block_mari",
     easing: "easeOutExpo",
-    durataion: 1500,
+    duration: 1500,
     scale: [0.6, 1],
     opacity: [0, 1],
     translateX: function(el, i) {
@@ -949,9 +1034,30 @@ function show_all_group_highschool() {
     },
     delay: function(el, index) {
       return index * 30;
+    },
+    update: function(animation) {
+      var el = document.getElementById("highschool_demo_text");
+      var al = Math.round(animation.progress * 4744000 / 100);
+      al = Math.max(al, 0);
+      al = Math.min(al, 4744000);
+      var mari = Math.round(animation.progress * 2600000 / 100);
+      mari = Math.max(mari, 0);
+      mari = Math.min(mari, 2600000);
+      var inner_html =
+        "Alcohol: " +
+        al.toString() +
+        "<br />" +
+        "Marijuana: " +
+        mari.toString();
+      el.innerHTML = inner_html.toString();
     }
   });
-
+  anime({
+    targets: ["#highschool_demo_text"],
+    visibilitY: "true",
+    opacity: [0, 1],
+    duration: 2000
+  });
   setTimeout(show_all_group_college, 400);
 }
 
@@ -1031,7 +1137,7 @@ function show_all_group_college() {
   anime({
     targets: ".college_block_alcohol",
     easing: "easeOutExpo",
-    durataion: 1500,
+    duration: 1500,
     scale: [0.6, 1],
     opacity: [0, 1],
     translateX: function(el, i) {
@@ -1059,7 +1165,7 @@ function show_all_group_college() {
   anime({
     targets: ".college_block_mari",
     easing: "easeOutExpo",
-    durataion: 1500,
+    duration: 1500,
     scale: [0.6, 1],
     opacity: [0, 1],
     translateX: function(el, i) {
@@ -1082,7 +1188,29 @@ function show_all_group_college() {
     },
     delay: function(el, index) {
       return index * 30;
+    },
+    update: function(animation) {
+      var el = document.getElementById("college_demo_text");
+      var al = Math.round(animation.progress * 11000000 / 100);
+      al = Math.max(al, 0);
+      al = Math.min(al, 11000000);
+      var mari = Math.round(animation.progress * 5360000 / 100);
+      mari = Math.max(mari, 0);
+      mari = Math.min(mari, 5360000);
+      var inner_html =
+        "Alcohol: " +
+        al.toString() +
+        "<br />" +
+        "Marijuana: " +
+        mari.toString();
+      el.innerHTML = inner_html.toString();
     }
+  });
+  anime({
+    targets: ["#college_demo_text"],
+    visibilitY: "true",
+    opacity: [0, 1],
+    duration: 2000
   });
   setTimeout(show_college_people_graph, 5000);
 }
@@ -1093,7 +1221,9 @@ function show_college_people_graph() {
       "#highschool_building",
       "#secondary_building",
       "#graph_highschool",
-      "#graph_secondary"
+      "#graph_secondary",
+      "#highschool_demo_text",
+      "#college_demo_text"
     ],
     visibilitY: "hidden",
     opacity: [1, 0],
@@ -1106,14 +1236,16 @@ function show_college_people_graph() {
     var t = document.createElement("div");
     t.setAttribute("class", "bar_container");
     var m = document.createElement("div");
-    m.setAttribute("class", "text_area");
+    m.setAttribute("class", "text_area text_area1");
+    m.setAttribute("id", "info_" + i.toString());
+    m.style.display = "flex";
     m.innerHTML =
       "Age: " +
       i.toString() +
       "<br />" +
-      "Alcohol: 10000" +
+      "Alcohol: 0" +
       "<br />" +
-      "Marijuana: 10000";
+      "Marijuana: 0";
     el = document.createElement("div");
     el.setAttribute("class", "young_graph_bar");
     el.setAttribute("id", "bar" + String.fromCharCode(65 + i) + "alcohol");
@@ -1154,15 +1286,32 @@ function show_college_people_graph() {
       translateY: function(ele, i) {
         var a = document.getElementById("graph_college");
         var b = document.getElementById("young_people_graph");
-        var dis =
-          a.getBoundingClientRect().top - b.getBoundingClientRect().top;
+        var dis = a.getBoundingClientRect().top - b.getBoundingClientRect().top;
         return [dis, 0];
       },
       delay: function(el, index) {
         return index * 50;
       },
       duration: 1000,
-      easing: "easeOutExpo"
+      easing: "easeOutExpo",
+      update: function(animation) {
+        var m = document.getElementById("info_18");
+        var al = Math.round(animation.progress * 2400000 / 100);
+        al = Math.max(al, 0);
+        al = Math.min(al, 2400000);
+        var mari = Math.round(animation.progress * 1300000 / 100);
+        mari = Math.max(mari, 0);
+        mari = Math.min(mari, 1300000);
+        var inner_html =
+          "Age: 18" +
+          "<br />" +
+          "Alcohol: " +
+          al.toString() +
+          "<br />" +
+          "Marijuana: " +
+          mari.toString();
+        m.innerHTML = inner_html.toString();
+      }
     });
     if (block_index < square.length - 1) {
       block_index += 1;
@@ -1197,15 +1346,32 @@ function show_college_people_graph() {
       translateY: function(ele, i) {
         var a = document.getElementById("graph_college");
         var b = document.getElementById("young_people_graph");
-        var dis =
-          a.getBoundingClientRect().top - b.getBoundingClientRect().top;
+        var dis = a.getBoundingClientRect().top - b.getBoundingClientRect().top;
         return [dis, 0];
       },
       delay: function(el, index) {
         return index * 50;
       },
       duration: 1000,
-      easing: "easeOutExpo"
+      easing: "easeOutExpo",
+      update: function(animation) {
+        var m = document.getElementById("info_19");
+        var al = Math.round(animation.progress * 2600000 / 100);
+        al = Math.max(al, 0);
+        al = Math.min(al, 2600000);
+        var mari = Math.round(animation.progress * 1300000 / 100);
+        mari = Math.max(mari, 0);
+        mari = Math.min(mari, 1300000);
+        var inner_html =
+          "Age: 19" +
+          "<br />" +
+          "Alcohol: " +
+          al.toString() +
+          "<br />" +
+          "Marijuana: " +
+          mari.toString();
+        // m.innerHTML = inner_html.toString();
+      }
     });
     if (block_index2 < square2.length - 1) {
       block_index2 += 1;
@@ -1240,15 +1406,32 @@ function show_college_people_graph() {
       translateY: function(ele, i) {
         var a = document.getElementById("graph_college");
         var b = document.getElementById("young_people_graph");
-        var dis =
-          a.getBoundingClientRect().top - b.getBoundingClientRect().top;
+        var dis = a.getBoundingClientRect().top - b.getBoundingClientRect().top;
         return [dis, 0];
       },
       delay: function(el, index) {
         return index * 50;
       },
       duration: 1000,
-      easing: "easeOutExpo"
+      easing: "easeOutExpo",
+      update: function(animation) {
+        var m = document.getElementById("info_20");
+        var al = Math.round(animation.progress * 2800000 / 100);
+        al = Math.max(al, 0);
+        al = Math.min(al, 120000);
+        var mari = Math.round(animation.progress * 1300000 / 100);
+        mari = Math.max(mari, 0);
+        mari = Math.min(mari, 1300000);
+        var inner_html =
+          "Age: 20" +
+          "<br />" +
+          "Alcohol: " +
+          al.toString() +
+          "<br />" +
+          "Marijuana: " +
+          mari.toString();
+        // m.innerHTML = inner_html.toString();
+      }
     });
     if (block_index3 < square3.length - 1) {
       block_index3 += 1;
@@ -1283,15 +1466,32 @@ function show_college_people_graph() {
       translateY: function(ele, i) {
         var a = document.getElementById("graph_college");
         var b = document.getElementById("young_people_graph");
-        var dis =
-          a.getBoundingClientRect().top - b.getBoundingClientRect().top;
+        var dis = a.getBoundingClientRect().top - b.getBoundingClientRect().top;
         return [dis, 0];
       },
       delay: function(el, index) {
         return index * 50;
       },
       duration: 1000,
-      easing: "easeOutExpo"
+      easing: "easeOutExpo",
+      update: function(animation) {
+        var m = document.getElementById("info_21");
+        var al = Math.round(animation.progress * 3300000 / 100);
+        al = Math.max(al, 0);
+        al = Math.min(al, 3300000);
+        var mari = Math.round(animation.progress * 1300000 / 100);
+        mari = Math.max(mari, 0);
+        mari = Math.min(mari, 1300000);
+        var inner_html =
+          "Age: 21" +
+          "<br />" +
+          "Alcohol: " +
+          al.toString() +
+          "<br />" +
+          "Marijuana: " +
+          mari.toString();
+        // m.innerHTML = inner_html.toString();
+      }
     });
     if (block_index4 < square4.length - 1) {
       block_index4 += 1;
@@ -1304,18 +1504,18 @@ function show_college_people_graph() {
   move_block4();
   setTimeout(function() {
     anime({
-      targets: ".text_area",
+      targets: ".text_area1",
       opacity: [0, 1],
       easing: "easeOutExpo",
-      durataion: 2000
+      duration: 2000
     });
-  }, 5000);
+  }, 0);
   setTimeout(function() {
     anime({
-      targets: ".text_area",
+      targets: ".text_area1",
       opacity: [1, 0],
       easing: "easeOutExpo",
-      durataion: 2000
+      duration: 2000
     });
     anime({
       targets: "#young_people_graph",
@@ -1356,14 +1556,14 @@ function show_proportion() {
       targets: child,
       opacity: [0, 1],
       scale: [0, 2],
-      durataion: 700,
+      duration: 700,
       easing: "easeOutExpo"
     },
     {
       targets: highschooler,
       opacity: [0, 1],
       scale: [0, 2],
-      durataion: 700,
+      duration: 700,
       easing: "easeOutExpo"
     },
     {
@@ -1371,7 +1571,7 @@ function show_proportion() {
       opacity: [0, 1],
       scale: [0, 2],
       fill: "#123456",
-      durataion: 700,
+      duration: 700,
       easing: "easeOutExpo"
     },
 
@@ -1380,7 +1580,7 @@ function show_proportion() {
       opacity: [1, 0],
       scale: [1, 0],
       offset: "+=2000",
-      durataion: 3000,
+      duration: 3000,
       easing: "easeOutExpo"
     }
   ]);
