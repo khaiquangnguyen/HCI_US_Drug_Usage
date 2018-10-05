@@ -28,8 +28,13 @@ function getPosition(el) {
   };
 }
 
-show_american_map();
 
+var x = document.getElementById("play-video");
+x.onclick= function(e){
+  e.preventDefault();
+  x.style.display = "none";
+  show_american_map();
+}
 function show_american_map() {
   var x = document.getElementById("background");
   x.volume = 0.15;
